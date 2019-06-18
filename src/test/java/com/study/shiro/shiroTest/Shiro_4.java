@@ -21,7 +21,7 @@ public class Shiro_4 {
     {
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("root");
-        druidDataSource.setUrl("jdbc:mysql://localhost/shirodemo?erverTimeZone=GMT%2B8");
+        druidDataSource.setUrl("jdbc:mysql://localhost/shirodemo?serverTimeZone=GMT%2B8");
     }
 
     @Test
