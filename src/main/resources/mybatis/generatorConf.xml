@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="mysql" targetRuntime="Mybatis3">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="com.chrm.mybatis.generator.plugins.LombokPlugin">
+            <property name="hasLombok" value="true"/>
+        </plugin>
+        <plugin type="com.chrm.mybatis.generator.plugins.CommentPlugin">
+            <!-- 抑制警告 -->
+            <property name="suppressTypeWarnings" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true"/>
+        </plugin>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/shirodemo?serverTimezone=Asia/Shanghai"
+                        userId="root" password="root">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="com.study.shiro.pojo" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/mybatis"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.study.shiro.dao" targetProject="src/main/java"/>
+        <table tableName="user" mapperName="UserDao" domainObjectName="User" enableDeleteByExample="false"
+               enableUpdateByExample="false"
+               enableSelectByExample="false"
+               enableCountByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="role" mapperName="RoleDao" domainObjectName="Role" enableDeleteByExample="false"
+               enableUpdateByExample="false"
+               enableSelectByExample="false"
+               enableCountByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="permission" mapperName="PermissionDao" domainObjectName="Permission" enableDeleteByExample="false"
+               enableUpdateByExample="false"
+               enableSelectByExample="false"
+               enableCountByExample="false"
+               selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>

@@ -25,8 +25,14 @@ import java.util.Set;
 public class CustomRealm extends AuthorizingRealm {
     Map<String,String> userMap=new HashMap<>();
     {
-        userMap.put("Bob","123456");
-        userMap.put("Bob","e10adc3949ba59abbe56e057f20f883e");
+        //userMap.put("Bob","123456");
+        /*
+        加密
+         */
+        //userMap.put("Bob","e10adc3949ba59abbe56e057f20f883e");
+       /*
+       加密加盐值
+        */
         userMap.put("Bob","84de1a43e7d1c2f246eb79310c306057");
     }
 
@@ -93,7 +99,7 @@ public class CustomRealm extends AuthorizingRealm {
 
         //比对账户信息，是则返回认证信息，否则抛出异常
         SimpleAuthenticationInfo info=new SimpleAuthenticationInfo("Bob",password,"customRealm");
-        info.setCredentialsSalt(ByteSource.Util.bytes("Bob"));
+        //info.setCredentialsSalt(ByteSource.Util.bytes("Bob"));
         return info;
     }
 
@@ -106,12 +112,12 @@ public class CustomRealm extends AuthorizingRealm {
         return userMap.get(username);
     }
 //  获取Md5加密之后的值
-/*   public static void main(String[] args) {
+  public static void main(String[] args) {
         Md5Hash md5Hash=new Md5Hash("123456");
         System.out.println("md5==>"+md5Hash);
 
         //加上盐值之后
         Md5Hash md5Hash1=new Md5Hash("123456","Bob");
        System.out.println("md5WithSalt==>"+md5Hash1);
-    }*/
+    }
 }
