@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * //TODO description end with .
  *
  * @author yanyue, 2019/6/19
- * @version Araf v1.0
+ * @version shiro v1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/spring-dao.xml")
