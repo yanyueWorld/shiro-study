@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * //TODO description end with .
+ * CustomerRealmServiceImpl 自定义Realm业务逻辑层实现类.
  *
  * @author yanyue, 2019/6/19
  * @version shiro v1.0

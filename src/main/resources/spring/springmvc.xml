@@ -12,8 +12,12 @@
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/static/**" location="/static/"/>
+
+    <!--开启aop-->
     <aop:config proxy-target-class="true"/>
+    <!--注册shiro的生命进程-->
     <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <!--将SecurityManager托管给shiro的注解管理-->
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor" id="advisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>

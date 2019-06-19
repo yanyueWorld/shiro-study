@@ -20,7 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class UserController {
-    @RequestMapping(value = "/subLogin", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+
+    /**
+     * 登录.
+     *
+     * @param user 用户对象
+     * @return Sring 登录结果
+     */
+    @RequestMapping(value = "/subLogin", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String subLogin(User user) {
         Subject subject = SecurityUtils.getSubject();
@@ -32,23 +39,33 @@ public class UserController {
         }
 
         //验证角色
-        if(subject.hasRole("admin")){
+        if (subject.hasRole("admin")) {
             return "admin";
         }
         return "登录成功";
     }
 
+    /**
+     * 角色控制
+     *
+     * @return String
+     */
     @RequiresRoles("admin")
-    @RequestMapping(value = "/testRole",method = RequestMethod.GET)
+    @RequestMapping(value = "/testRole", method = RequestMethod.GET)
     @ResponseBody
-    public String testRole(){
+    public String testRole() {
         return "testRole";
     }
 
+    /**
+     * 权限控制
+     *
+     * @return String 
+     */
     @RequiresPermissions("account:*")
-    @RequestMapping(value = "/testPermission",method = RequestMethod.GET)
+    @RequestMapping(value = "/testPermission", method = RequestMethod.GET)
     @ResponseBody
-    public String testPermission(){
+    public String testPermission() {
         return "testPermission";
     }
 }

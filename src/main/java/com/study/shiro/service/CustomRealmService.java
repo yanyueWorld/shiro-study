@@ -6,7 +6,7 @@ import com.study.shiro.pojo.Role;
 import java.util.Set;
 
 /**
- * CustomRealmService 自定义Realm层 .
+ * CustomRealmService 自定义Realm业务逻辑层 .
  *
  * @author yanyue, 2019/6/19
  * @version Shiro v1.0

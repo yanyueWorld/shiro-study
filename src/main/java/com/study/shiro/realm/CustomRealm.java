@@ -23,7 +23,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * 自定义Realm
+ * 自定义Realm.
  *
  * @author yanyue, 2019/6/17
  * @version shiro v1.0

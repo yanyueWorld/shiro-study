@@ -5,23 +5,45 @@ import com.study.shiro.pojo.Role;
 import java.util.List;
 
 /**
- * RoleDao 角色Dao层 .
+ * RoleDao 角色Dao层.
  *
  * @author yanyue, 2019/6/19
- * @version Araf v1.0
+ * @version Shiro v1.0
  */
 public interface RoleDao {
+    /**
+     * 根据主键id删除数据.
+     *
+     * @param id 主键id
+     * @return int 操作行数
+     */
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Role record);
 
-    int insertSelective(Role record);
+    /**
+     * 新增角色.
+     *
+     * @param role 角色对象
+     * @return int 操作行数
+     * @throws
+     */
+    int insertSelective(Role role);
 
-    Role selectByPrimaryKey(Integer id);
+    /**
+     * 修改角色.
+     *
+     * @param role 角色对象
+     * @return int 操作行数
+     * @throws
+     */
+    int updateByPrimaryKeySelective(Role role);
 
-    int updateByPrimaryKeySelective(Role record);
-
-    int updateByPrimaryKey(Role record);
-
+    /**
+     * 根据用户id查询角色.
+     *
+     * @param userId 用户id
+     * @return List<Role> 角色链表
+     * @throws
+     */
     List<Role> getRolesByUserId(Integer userId);
 }
