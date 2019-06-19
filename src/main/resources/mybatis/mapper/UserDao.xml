@@ -37,9 +37,11 @@
     
     <!-- 最后登录时间 -->
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+
+    <association property="roles" column="id" select="com.study.shiro.dao.RoleDao.getRolesByUserId"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, username, password, salt, email, phone, sex, age, status, create_time, 
+    user.id id, user_id, username, password, salt, email, phone, sex, age, status, create_time,
     update_time, last_login_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

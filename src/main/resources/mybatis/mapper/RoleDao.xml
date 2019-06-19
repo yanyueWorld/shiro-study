@@ -21,9 +21,11 @@
     
     <!-- 更新时间 -->
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+
+    <collection property="permissions" column="id" select="com.study.shiro.dao.PermissionDao.getPermissionsByRoleId"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, role_id, name, description, status, create_time, update_time
+    role.id id, role.role_id role_id, name, description, status, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

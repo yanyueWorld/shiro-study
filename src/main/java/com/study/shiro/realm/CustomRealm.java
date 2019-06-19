@@ -4,6 +4,7 @@ import com.study.shiro.dao.UserDao;
 import com.study.shiro.pojo.Permission;
 import com.study.shiro.pojo.Role;
 import com.study.shiro.pojo.User;
+import com.study.shiro.service.CustomRealmService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -33,7 +34,7 @@ public class CustomRealm extends AuthorizingRealm {
         userMap.put("bob","84de1a43e7d1c2f246eb79310c306057");
     }*/
     @Autowired
-    private UserDao userDao;
+    private CustomRealmService customRealmService;
 
     //  获取Md5加密之后的值
     public static void main(String[] args) {
@@ -63,8 +64,8 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) principals.getPrimaryPrincipal();
 
         //获取角色，权限信息
-        Set<String> roles = getRoleByUsername(username);
-        Set<String> permissions = getPermissionsByUsername(username);
+        Set<String> roles = customRealmService.getRoleNameByUser(username);
+        Set<String> permissions = customRealmService.getPermissionsByUser(username);
 
         //返回授权信息
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -86,15 +87,7 @@ public class CustomRealm extends AuthorizingRealm {
         set.add("user");
         return set;
     }*/
-    private Set<String> getRoleByUsername(String username) {
-        Set<String> set = new HashSet<>();
-        List<Role> roles = userDao.getUserByUsername(username).getRoles();
-        for (Role role : roles) {
-            set.add(role.getName());
-        }
-        System.out.println("role==>"+set);
-        return set;
-    }
+
 
     /**
      * 模拟从数据库中或者缓存中获取权限集合
@@ -108,17 +101,7 @@ public class CustomRealm extends AuthorizingRealm {
         set.add("user:update");
         return set;
     }*/
-    private Set<String> getPermissionsByUsername(String username) {
-        Set<String> set = new HashSet<>();
-        List<Role> roles = userDao.getUserByUsername(username).getRoles();
-        for (Role role : roles) {
-            for (Permission permission : role.getPermissions()) {
-                set.add(permission.getName());
-            }
-        }
-        System.out.println("permission==>"+set);
-        return set;
-    }
+
 
     /**
      * 验证.
@@ -133,14 +116,14 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) token.getPrincipal();
         System.out.println("username==>" + username);
         //通过用户名获取密码
-        String password = getPasswordByUsername(username);
+        String password = customRealmService.getPasswordByUsername(username);
         if (password == null) {
             return null;
         }
 
         //比对账户信息，是则返回认证信息，否则抛出异常
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(token.getPrincipal(), password, getName());
-        String salt=getSaltByUsername(username);
+        String salt=customRealmService.getSaltByUsername(username);
         info.setCredentialsSalt(ByteSource.Util.bytes(salt));
         return info;
     }
@@ -154,21 +137,5 @@ public class CustomRealm extends AuthorizingRealm {
     /*private String getPasswordByUsername(String username) {
         return userMap.get(username);
     }*/
-    private String getPasswordByUsername(String username) {
-        User user = userDao.getUserByUsername(username);
-        System.out.println(user.getPassword());
-        if (user != null) {
-            return user.getPassword();
-        }
-        return null;
-    }
 
-    private String getSaltByUsername(String username) {
-        User user = userDao.getUserByUsername(username);
-        if(user!=null){
-            System.out.println(user.getSalt());
-            return user.getSalt();
-        }
-        return null;
-    }
 }
