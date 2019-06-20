@@ -17,12 +17,13 @@ import java.io.Serializable;
  */
 public class CustomSessionManager extends DefaultWebSessionManager {
 
-     /**
-       * 将session放入request中，减少request的使用
-       * @param sessionKey
-       * @return Session
-       * @throws UnknownSessionException
-       */
+    /**
+     * 将session放入request中，减少request的使用
+     *
+     * @param sessionKey
+     * @return Session
+     * @throws UnknownSessionException
+     */
     @Override
     protected Session retrieveSession(SessionKey sessionKey) throws UnknownSessionException {
         Serializable sessionId = getSessionId(sessionKey);
@@ -32,8 +33,8 @@ public class CustomSessionManager extends DefaultWebSessionManager {
         }
         if (request != null && sessionId != null) {
             Session session = (Session) request.getAttribute(sessionId.toString());
-            if(session != null){
-                return  session;
+            if(session!=null){
+                return session;
             }
         }
         Session session = super.retrieveSession(sessionKey);

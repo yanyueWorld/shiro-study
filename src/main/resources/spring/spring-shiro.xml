@@ -30,7 +30,7 @@
     <bean class="com.study.shiro.filter.RolesOrFilter" id="rolesOrFilter"/>
     <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
         <property name="realm" ref="realm"/>
-        <property name="sessionManager" ref="sessionManager"/>
+        <property name="sessionManager" ref="customSessionManager"/>
     </bean>
 
     <bean class="com.study.shiro.realm.CustomRealm" id="realm">
@@ -46,9 +46,9 @@
         <property name="sessionDAO" ref="redisSessionDao"/>
     </bean>
     <!--自定义的SessionManager-->
-<!--    <bean class="com.study.shiro.session.CustomSessionManager" id="customSessionManager">-->
-<!--        <property name="sessionDAO" ref="redisSessionDao"/>-->
-<!--    </bean>-->
+    <bean class="com.study.shiro.session.CustomSessionManager" id="customSessionManager">
+        <property name="sessionDAO" ref="redisSessionDao"/>
+    </bean>
 
     <bean class="com.study.shiro.session.RedisSessionDao" id="redisSessionDao"/>
 </beans>

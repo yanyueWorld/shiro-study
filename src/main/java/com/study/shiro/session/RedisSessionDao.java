@@ -35,7 +35,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
             byte[] key = getKey(session.getId().toString());
             byte[] value = SerializationUtils.serialize(session);
             jedisUtil.set(key, value);
-            jedisUtil.expire(key, 600);
+            jedisUtil.expire(key, 60);
         }
     }
 
@@ -49,7 +49,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-        System.out.println(sessionId);
+        System.out.println("read session");
         if (sessionId == null) {
             return null;
         }
