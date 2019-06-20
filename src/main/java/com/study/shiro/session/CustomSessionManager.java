@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import java.io.Serializable;
 
 /**
- * 自定义SessionManager.
+ * 自定义SessionManager 减少Shiro对redis的访问次数.
  *
  * @author yanyue, 2019/6/20
  * @version shiro v1.0

@@ -59,7 +59,6 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("principals==>" + principals);
         //从凭证中获取用户名
         String username = (String) principals.getPrimaryPrincipal();
 
@@ -71,7 +70,6 @@ public class CustomRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setStringPermissions(permissions);
         info.setRoles(roles);
-        System.out.println("info==>" + info);
         return info;
     }
 
@@ -114,7 +112,6 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //从凭据中获取用户名
         String username = (String) token.getPrincipal();
-        System.out.println("username==>" + username);
         //通过用户名获取密码
         String password = customRealmService.getPasswordByUsername(username);
         if (password == null) {
