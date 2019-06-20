@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.alibaba.com/schema/stat http://www.alibaba.com/schema/stat.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd     http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/static/login.html"/>
-        <property name="unauthorizedUrl" value="403.html"/>
+        <property name="unauthorizedUrl" value="/static/403.html"/>
         <property name="filterChainDefinitions">
             <value>
                 /static/login.html=anon
+                /testPermission1=perms["account:managerAdd"]
+                /testPermission2=perms["account:managerAdd","account:managerDelete"]
+                /testRole1=roles["admin"]
+                /testRole2=roles["admin","customer"]
+                /rolesOr=rolesOr["admin","customer"]
                 /subLogin=anon
                 /*=authc
             </value>
         </property>
+        <property name="filters">
+            <util:map>
+                <entry key="rolesOr" value-ref="rolesOrFilter"/>
+            </util:map>
+        </property>
     </bean>
-
+    <bean class="com.study.shiro.filter.RolesOrFilter" id="rolesOrFilter"/>
     <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
         <property name="realm" ref="realm"/>
     </bean>

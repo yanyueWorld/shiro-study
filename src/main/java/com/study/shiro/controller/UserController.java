@@ -60,12 +60,57 @@ public class UserController {
     /**
      * 权限控制
      *
-     * @return String 
+     * @return String
      */
     @RequiresPermissions("account:*")
     @RequestMapping(value = "/testPermission", method = RequestMethod.GET)
     @ResponseBody
     public String testPermission() {
         return "testPermission";
+    }
+
+    /**
+     * 权限控制
+     */
+    @RequestMapping(value = "/testPermission1", method = RequestMethod.GET)
+    @ResponseBody
+    public String testPermission1() {
+        return "testPermission1";
+    }
+
+    /**
+     * 权限控制
+     */
+    @RequestMapping(value = "/testPermission2", method = RequestMethod.GET)
+    @ResponseBody
+    public String testPermission2() {
+        return "testPermission2";
+    }
+
+    /**
+     * 角色控制
+     */
+    @RequestMapping(value = "/testRole1", method = RequestMethod.GET)
+    @ResponseBody
+    public String testRole1() {
+        return "testRole1";
+    }
+
+    /**
+     * 角色控制
+     */
+    @RequestMapping(value = "/testRole2", method = RequestMethod.GET)
+    @ResponseBody
+    public String testRole2() {
+        return "testRole2";
+    }
+
+    /**
+     * 自定义过滤器 角色控制
+     */
+    @RequestMapping(value = "/rolesOr", method = RequestMethod.GET)
+    @ResponseBody
+    public String rolesOr() {
+        return "rolesOr";
     }
 }
