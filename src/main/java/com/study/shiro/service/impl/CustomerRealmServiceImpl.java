@@ -38,6 +38,7 @@ public class CustomerRealmServiceImpl implements CustomRealmService {
 
     @Override
     public Set<String> getRoleNameByUser(String username) {
+        System.out.println("db get");
         if(username==null||username.length()==0){
             return null;
         }
