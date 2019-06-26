@@ -38,7 +38,7 @@ public class CustomRealm extends AuthorizingRealm {
 
     //  获取Md5加密之后的值
     public static void main(String[] args) {
-        String password = "admin";
+        String password = "seller";
         String model = "abcdefghijklmnopqrstuvwxyz1234567890";
         Random random = new Random();
         StringBuffer salt = new StringBuffer();
